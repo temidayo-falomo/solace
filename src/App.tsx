@@ -1,12 +1,13 @@
 import { lazy, Suspense } from 'react'
 import './App.css'
+import { MusicPlayer } from './components/MusicPlayer'
 import { RsvpForm } from './components/RsvpForm'
 
 const ReserveTable = lazy(() => import('./components/ReserveTable').then(module => ({ default: module.ReserveTable })))
 
 function App() {
   if (window.location.pathname.replace(/\/$/, '') === '/reserve-table' || window.location.pathname.replace(/\/$/, '') === '/reserve-section') {
-    return <Suspense fallback={<main className="room-loader">Loading the lounge…</main>}><ReserveTable /></Suspense>
+    return <><Suspense fallback={<main className="room-loader">Loading the lounge…</main>}><ReserveTable /></Suspense><MusicPlayer /></>
   }
   return (
     <main className="landing">
@@ -38,6 +39,7 @@ function App() {
         <div className="rsvp-details"><dl><div><dt>WHEN</dt><dd>Wednesday, 4 November 2026</dd></div><div><dt>WHERE</dt><dd>0808 Lagos</dd></div><div><dt>TIME</dt><dd>8:00 PM — 2:00 AM</dd></div><div><dt>ENTRY</dt><dd>RSVP & sections only</dd></div></dl><a className="booking-button" href="/reserve-section">EXPLORE SECTIONS <span aria-hidden="true">↗</span></a><RsvpForm /><a className="calendar-link" href="/solace.ics" download>ADD TO CALENDAR <span aria-hidden="true">+</span></a></div>
       </section>
       <footer><a className="small-wordmark" href="#">SOLACE</a><span>WED 04.11.26 / LAGOS</span><a href="#event-title">BACK TO TOP ↑</a></footer>
+      <MusicPlayer />
     </main>
   )
 }
