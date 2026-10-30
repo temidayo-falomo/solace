@@ -46,22 +46,45 @@ stage.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 const tableTargets = [];
 function registerTable(id, x, z) {
- const marker = new THREE.Mesh(new THREE.CylinderGeometry(.55,.55,.045,32), new THREE.MeshBasicMaterial({color:0xc9a45c, transparent:true, opacity:.32}));
- marker.position.set(x,.49,z); marker.userData.tableId=id; scene.add(marker); tableTargets.push(marker);
+ const marker = new THREE.Mesh(new THREE.CylinderGeometry(.55,.55,.045,32), new THREE.MeshBasicMaterial({color:0xe952de, transparent:true, opacity:.6, toneMapped:false}));
+ marker.position.set(x,.49,z); marker.userData.tableId=id; marker.userData.marker=true; scene.add(marker); tableTargets.push(marker);
 
 }
+let selectedSection = null, hoveredSection = null;
+const sectionBadges = new Map();
+function updateSectionStates() {
+ tableTargets.filter(m => m.userData.marker).forEach(m => {
+  const selected = m.userData.tableId === selectedSection;
+  const hovered = m.userData.tableId === hoveredSection;
+  m.material.color.setHex(selected ? 0xf5a0ee : hovered ? 0xf17ce7 : 0xe952de);
+  m.material.opacity = selected ? .95 : hovered ? .85 : .6;
+ });
+ sectionBadges.forEach((badge, id) => badge.userData.paint(id === selectedSection ? 'selected' : id === hoveredSection ? 'hover' : 'idle'));
+}
 function selectTable(id) {
- tableTargets.forEach(m => {m.material.color.setHex(m.userData.tableId===id?0xf4cb4c:0xc9a45c); m.material.opacity=m.userData.tableId===id?.95:.32;});
+ selectedSection = id; updateSectionStates();
 }
 let pointerStart;
 const pointerDown = e => {pointerStart=[e.clientX,e.clientY];};
 renderer.domElement.addEventListener("pointerdown", pointerDown);
-const pointerUp = e => {
- if(!pointerStart || Math.hypot(e.clientX-pointerStart[0],e.clientY-pointerStart[1])>6) return;
- const rect=renderer.domElement.getBoundingClientRect(); const ray=new THREE.Raycaster();
+const hitAt = e => {
+ const rect = renderer.domElement.getBoundingClientRect(), ray = new THREE.Raycaster();
  ray.setFromCamera(new THREE.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1),camera);
- const hit=ray.intersectObjects(tableTargets)[0]; if(hit) {onSelect(hit.object.userData.tableId);}
+ return ray.intersectObjects(tableTargets.filter(object => !object.isSprite || labels.visible))[0];
 };
+const pointerMove = e => {
+ const hit = hitAt(e), id = hit?.object.userData.tableId ?? null;
+ renderer.domElement.style.cursor = hit ? 'pointer' : 'grab';
+ if (id !== hoveredSection) { hoveredSection = id; updateSectionStates(); }
+};
+const pointerLeave = () => { hoveredSection = null; updateSectionStates(); };
+renderer.domElement.addEventListener('pointerleave', pointerLeave);
+const pointerUp = e => {
+ const start = pointerStart; pointerStart = null;
+ if(!start || Math.hypot(e.clientX-start[0],e.clientY-start[1])>6) return;
+ const hit = hitAt(e); if(hit) onSelect(hit.object.userData.tableId);
+};
+renderer.domElement.addEventListener('pointermove', pointerMove);
 renderer.domElement.addEventListener("pointerup", pointerUp);
 scene.background = new THREE.Color(0x0d0e0c);
 const camera = new THREE.PerspectiveCamera(50, stage.clientWidth / stage.clientHeight, 0.05, 200);
@@ -212,13 +235,26 @@ const labels = new THREE.Group(); scene.add(labels);
 function label(text, x, y, z, size = 0.5, sub) {
   const c = document.createElement("canvas"); c.width = 512; c.height = sub ? 192 : 128;
   const g = c.getContext("2d");
-  g.fillStyle = "rgba(13,14,12,.86)"; g.strokeStyle = "#c9a45c"; g.lineWidth = 4;
-  g.beginPath(); g.roundRect ? g.roundRect(4, 4, 504, c.height - 8, 14) : g.rect(4, 4, 504, c.height - 8); g.fill(); g.stroke();
-  g.fillStyle = "#e8dec7"; g.textAlign = "center"; g.textBaseline = "middle";
-  g.font = '700 52px Manrope, Arial, sans-serif'; g.fillText(text, 256, sub ? 70 : 66);
-  if (sub) { g.fillStyle = "#c9a45c"; g.font = '500 36px Manrope, Arial, sans-serif'; g.fillText(sub, 256, 136); }
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; textures.add(t);
+  let lastState;
+  const paint = state => {
+    if (state === lastState) return;
+    lastState = state;
+    const actionable = Boolean(sub), selected = state === 'selected';
+    const ink = actionable ? '#131313' : '#e8dec7';
+    g.clearRect(0, 0, c.width, c.height);
+    g.fillStyle = actionable ? (selected ? '#f5a0ee' : state === 'hover' ? '#f17ce7' : '#e952de') : 'rgba(13,14,12,.86)';
+    g.strokeStyle = actionable ? '#ffd7fa' : '#c9a45c'; g.lineWidth = selected ? 10 : 4;
+    g.beginPath(); g.roundRect(4, 4, 504, c.height - 8, 14); g.fill(); g.stroke();
+    g.fillStyle = ink; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.font = '700 52px Manrope, Arial, sans-serif'; g.fillText(text, 256, sub ? 70 : 66);
+    if (sub) { g.font = '700 36px Manrope, Arial, sans-serif'; g.fillText(selected ? 'SELECTED · VIEW ↗' : sub, 256, 136); }
+    t.needsUpdate = true;
+  };
+  paint('idle');
   const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, transparent: true }));
+  s.userData.paint = paint;
+  s.material.toneMapped = false;
   s.scale.set(size * 4, size * c.height / 128, 1); s.position.set(x, y, z); s.renderOrder = 10; labels.add(s); return s;
 }
 function numberTag(n, x, y, z) {
@@ -309,6 +345,7 @@ function cagePendant(x, z, y = 2.55) {
 
 SECTIONS.forEach(s => {
   const { y, h } = s;
+  const furnitureStart = scene.children.length;
   const n = s.tables.length;
   // TV centred on the bookshelf wall
   const wallFace = X(s.wallX) + s.dir * 0.02, cz = Z(y + h / 2);
@@ -336,8 +373,12 @@ SECTIONS.forEach(s => {
     });
     cagePendant(X(at(s, 260)), Z(y + h / 2));
   }
+  scene.children.slice(furnitureStart).forEach(object => {
+    object.traverse(child => { if (child.isMesh) { child.userData.tableId = s.id; tableTargets.push(child); } });
+  });
   registerTable(s.id, X(s.x + s.w / 2), Z(y + h / 2));
-  label(`SECTION ${s.id}`, X(s.x + s.w / 2), 2.25, Z(y + h / 2), 0.36);
+  const badge = label(`SECTION ${s.id}  ↗`, X(s.x + s.w / 2), 2.25, Z(y + h / 2), 0.45, 'VIEW & RESERVE');
+  badge.userData.tableId = s.id; tableTargets.push(badge); sectionBadges.set(s.id, badge);
 });
 
 /* ---------- brass lattice screens between sections ---------- */
@@ -441,7 +482,6 @@ function lattice(side, pz) {
   plane(3.4, 1.7, mat.logoScript, (x0 + x1) / 2, 2.2, -hd + 0.09);
   for (let i = 0; i < 6; i++) box(0.2, 0.22, 0.2, mat.black, wx0 + 0.4 + i * (wx1 - wx0 - 0.8) / 5, H - 0.12, -hd + 0.25);
   label("DJ BOOTH", (x0 + x1) / 2, 2.95, -hd + 0.35, 0.3);
-  label("TOILETS", (td0 + td1) / 2, 2.55, -hd + 0.3, 0.26);
 })();
 
 /* ---------- lobby ---------- */
@@ -468,9 +508,6 @@ function lattice(side, pz) {
   box(hx1 - hx0, 0.05, hz1 - hz0, mat.marble, 0, 1.0, (hz0 + hz1) / 2);
   box(hx1 - hx0 - 0.1, 0.03, 0.02, mat.brass, 0, 0.9, hz1 - 0.03);
   cyl(0.09, 0.12, 0.2, mat.cream, 0.6, 1.22, (hz0 + hz1) / 2, 20);
-  label("HOST", 0, 1.55, (hz0 + hz1) / 2, 0.22);
-  label("CURTAIN", x0 - 0.3, 2.85, (za + zc) / 2, 0.2);
-  label("CURTAIN", x1 + 0.3, 2.85, (za + zc) / 2, 0.2);
 })();
 
 /* ---------- ceiling (off by default) ---------- */
@@ -478,15 +515,17 @@ const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(M(W), M(D)), mat.ceiling)
 ceiling.rotation.x = Math.PI / 2; ceiling.position.y = H; ceiling.visible = false; scene.add(ceiling);
 
 /* ---------- lighting ---------- */
-// low fill so the room reads as a dark lounge lit by its pendants, shelves and bar
-scene.add(new THREE.HemisphereLight(0xfff0d8, 0x1a1712, 0.14));
-scene.add(new THREE.AmbientLight(0xffffff, 0.03));
+// Lift seating and floor detail without losing the warm pools of club lighting.
+scene.add(new THREE.HemisphereLight(0xfff0d8, 0x29332d, 0.32));
+scene.add(new THREE.AmbientLight(0xffffff, 0.06));
 const warm = (x, y, z, i, d) => { const l = new THREE.PointLight(0xffc98a, i * Math.PI, d, 1.6); l.position.set(x, y, z); scene.add(l); };
 warm(0, 2.0, -3.2, 1.7, 8); warm(0, 2.0, 1.8, 1.7, 8);
-[-1, 1].forEach(sg => { warm(sg * (hw - 2.6), 2.4, -4.5, 1.25, 7); warm(sg * (hw - 2.6), 2.4, 3.5, 1.25, 7); });
+[-1, 1].forEach(sg => { warm(sg * (hw - 2.6), 2.4, -4.5, 1.55, 9); warm(sg * (hw - 2.6), 2.4, 3.5, 1.55, 9); });
 warm(0, 2.6, 8.4, 1.0, 5);
+
 const dj = new THREE.PointLight(0x7a5cff, 1.4 * Math.PI, 8, 1.6); dj.position.set(0, 2.8, -7.4); scene.add(dj);
-const key = new THREE.DirectionalLight(0xfff4e0, 0.08); key.position.set(-6, 14, 8); scene.add(key);
+const key = new THREE.DirectionalLight(0xfff4e0, 0.22); key.position.set(-6, 14, 8); scene.add(key);
+const fill = new THREE.DirectionalLight(0xaaa6e8, 0.1); fill.position.set(8, 6, -6); scene.add(fill);
 
 /* ---------- views ---------- */
 const VIEWS = {
@@ -541,6 +580,8 @@ return {
   observer.disconnect();
   renderer.domElement.removeEventListener('pointerdown', pointerDown);
   renderer.domElement.removeEventListener('pointerup', pointerUp);
+  renderer.domElement.removeEventListener('pointermove', pointerMove);
+  renderer.domElement.removeEventListener('pointerleave', pointerLeave);
   controls.dispose();
   const geometries = new Set(), materials = new Set();
   scene.traverse(object => {
