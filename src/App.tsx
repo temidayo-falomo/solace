@@ -5,6 +5,12 @@ import { RsvpForm } from './components/RsvpForm'
 
 const ReserveTable = lazy(() => import('./components/ReserveTable').then(module => ({ default: module.ReserveTable })))
 
+const lineup = [
+  { name: 'UNCLE BUBU', logo: { src: '/solace-logos/coloured%20face%20white%20text.png', width: 1702, height: 738 } },
+  { name: 'SEYI DURETTI', logo: { src: '/solace-logos/Duretti%20Confetti%20logo.png', width: 1208, height: 556 } },
+  { name: 'ZULU TEBEDA' },
+]
+
 function App() {
   if (window.location.pathname.replace(/\/$/, '') === '/reserve-table' || window.location.pathname.replace(/\/$/, '') === '/reserve-section') {
     return <><Suspense fallback={<main className="room-loader">Loading the lounge…</main>}><ReserveTable /></Suspense><MusicPlayer /></>
@@ -31,7 +37,12 @@ function App() {
 
       <section className="lineup" aria-labelledby="lineup-title">
         <div className="section-top"><h2 id="lineup-title">ON THE SELECTS</h2><span>THREE NAMES. ONE NIGHT.</span></div>
-        <div className="artist-list">{['UNCLE BUBU', 'SEYI DURETTI', 'ZULU TEBEDA'].map((artist, i) => <div className="artist" key={artist}><span className="artist-index">0{i + 1}</span><h3>{artist}</h3><span className="artist-star" aria-hidden="true">✳</span></div>)}</div>
+        <div className="artist-list">{lineup.map(({ name, logo }, i) => <div className="artist" key={name}><span className="artist-index">0{i + 1}</span><h3>{logo ? <img className="artist-logo" src={logo.src} width={logo.width} height={logo.height} alt={name} loading="lazy" /> : name}</h3><span className="artist-star" aria-hidden="true">✳</span></div>)}</div>
+      </section>
+
+      <section className="partners" aria-labelledby="partners-title">
+        <h2 id="partners-title">PRESENTED WITH</h2>
+        <img className="partner-logo" src="/solace-logos/A1-logo.png" width="713" height="576" alt="A1 & Friends" loading="lazy" />
       </section>
 
       <section className="rsvp-section" id="rsvp" aria-labelledby="rsvp-title">
