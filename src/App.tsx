@@ -1,10 +1,11 @@
 import { lazy, Suspense } from 'react'
 import './App.css'
+import { RsvpForm } from './components/RsvpForm'
 
 const ReserveTable = lazy(() => import('./components/ReserveTable').then(module => ({ default: module.ReserveTable })))
 
 function App() {
-  if (window.location.pathname.replace(/\/$/, '') === '/reserve-table') {
+  if (window.location.pathname.replace(/\/$/, '') === '/reserve-table' || window.location.pathname.replace(/\/$/, '') === '/reserve-section') {
     return <Suspense fallback={<main className="room-loader">Loading the lounge…</main>}><ReserveTable /></Suspense>
   }
   return (
@@ -13,7 +14,7 @@ function App() {
       <header className="site-nav">
         <a href="#" className="small-wordmark" aria-label="Solace home">SOLACE</a>
         <span className="nav-caption">A LITTLE ESCAPE. A LATE NIGHT.</span>
-        <a className="nav-rsvp" href="#rsvp">RSVP & TABLES <span aria-hidden="true">↗</span></a>
+        <a className="nav-rsvp" href="#rsvp">RSVP & SECTIONS <span aria-hidden="true">↗</span></a>
       </header>
 
       <section className="hero" aria-labelledby="event-title">
@@ -33,8 +34,8 @@ function App() {
       </section>
 
       <section className="rsvp-section" id="rsvp" aria-labelledby="rsvp-title">
-        <div className="rsvp-copy"><p className="section-kicker">SAVE YOUR WEDNESDAY.</p><h2 id="rsvp-title">FIND YOUR<br /><span>SOLACE.</span></h2><p>A night at 0808 Lagos, soundtracked by Uncle Bubu, Seyi Duretti and Zulu Tebeda. Come through. Stay a little longer.</p></div>
-        <div className="rsvp-details"><dl><div><dt>WHEN</dt><dd>Wednesday, 4 November 2026</dd></div><div><dt>WHERE</dt><dd>0808 Lagos</dd></div><div><dt>TIME</dt><dd>8:00 PM — 2:00 AM</dd></div><div><dt>ENTRY</dt><dd>RSVP & tables only</dd></div></dl><a className="booking-button" href="/reserve-table">EXPLORE TABLES <span aria-hidden="true">↗</span></a><a className="calendar-link" href="/solace.ics" download>ADD TO CALENDAR <span aria-hidden="true">+</span></a></div>
+        <div className="rsvp-copy"><p className="section-kicker">SAVE YOUR WEDNESDAY.</p><h2 id="rsvp-title">FIND YOUR<br /><span>SOLACE.</span></h2><p>Come for the music. Stay for the Solace.</p></div>
+        <div className="rsvp-details"><dl><div><dt>WHEN</dt><dd>Wednesday, 4 November 2026</dd></div><div><dt>WHERE</dt><dd>0808 Lagos</dd></div><div><dt>TIME</dt><dd>8:00 PM — 2:00 AM</dd></div><div><dt>ENTRY</dt><dd>RSVP & sections only</dd></div></dl><a className="booking-button" href="/reserve-section">EXPLORE SECTIONS <span aria-hidden="true">↗</span></a><RsvpForm /><a className="calendar-link" href="/solace.ics" download>ADD TO CALENDAR <span aria-hidden="true">+</span></a></div>
       </section>
       <footer><a className="small-wordmark" href="#">SOLACE</a><span>WED 04.11.26 / LAGOS</span><a href="#event-title">BACK TO TOP ↑</a></footer>
     </main>

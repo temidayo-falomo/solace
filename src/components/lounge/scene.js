@@ -35,7 +35,7 @@ const at = (s, d) => s.wallX + s.dir * d;
 /* ---------- renderer, scene, camera ---------- */
 let renderer;
 try { renderer = new THREE.WebGLRenderer({ antialias: true }); }
-catch { throw new Error("This device could not start 3D graphics. Choose a table from the list instead."); }
+catch { throw new Error("This device could not start 3D graphics. Choose a section from the list instead."); }
 renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 renderer.setSize(stage.clientWidth, stage.clientHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -48,7 +48,7 @@ const tableTargets = [];
 function registerTable(id, x, z) {
  const marker = new THREE.Mesh(new THREE.CylinderGeometry(.55,.55,.045,32), new THREE.MeshBasicMaterial({color:0xc9a45c, transparent:true, opacity:.32}));
  marker.position.set(x,.49,z); marker.userData.tableId=id; scene.add(marker); tableTargets.push(marker);
- label(String(id).padStart(2,"0"),x,.85,z,.26);
+
 }
 function selectTable(id) {
  tableTargets.forEach(m => {m.material.color.setHex(m.userData.tableId===id?0xf4cb4c:0xc9a45c); m.material.opacity=m.userData.tableId===id?.95:.32;});
@@ -318,9 +318,9 @@ SECTIONS.forEach(s => {
     const x1 = s.wallX - 345, x2 = s.wallX - 20, sy = y + 40;
     sofa(X(x1), Z(sy), X(x2), Z(sy + 88), "n", n);
     const span = (x2 - x1) / n;
-    s.tables.forEach((tn, i) => {
+    s.tables.forEach((_, i) => {
       const tx = X(x1 + (i + 0.5) * span), tz = Z(sy + 88 + 52);
-      coffeeTable(tx, tz, 0.38); registerTable(tn,tx,tz);
+      coffeeTable(tx, tz, 0.38); 
     });
     [y + 92, y + 180].forEach(cy => tubChair(X(s.wallX - 400), Z(cy), X(x1 + span / 2), Z(cy)));
     cagePendant(X(s.x + s.w / 2), Z(y + h / 2));
@@ -329,13 +329,14 @@ SECTIONS.forEach(s => {
     const sofaNear = at(s, 20), sofaFar = at(s, 115);
     sofa(X(sofaNear), Z(top), X(sofaFar), Z(bot), s.dir === 1 ? "w" : "e", n);
     const span = (bot - top) / n, r = Math.min(48, span * 0.36);
-    s.tables.forEach((tn, i) => {
+    s.tables.forEach((_, i) => {
       const tz = Z(top + (i + 0.5) * span), tx = X(at(s, 250)), cx = X(at(s, 400));
-      coffeeTable(tx, tz, M(r)); registerTable(tn,tx,tz);
+      coffeeTable(tx, tz, M(r)); 
       tubChair(cx, tz, tx, tz);
     });
     cagePendant(X(at(s, 260)), Z(y + h / 2));
   }
+  registerTable(s.id, X(s.x + s.w / 2), Z(y + h / 2));
   label(`SECTION ${s.id}`, X(s.x + s.w / 2), 2.25, Z(y + h / 2), 0.36);
 });
 
