@@ -46,7 +46,7 @@ export function RsvpForm({ section }: { section?: number }) {
   if (status === "sent") {
     return (
       <div className="rsvp-form" role="status">
-        <p>You’re on the guestlist. Get first access as new drops are announced.</p>
+        <p>You’re on the guestlist.</p>
       </div>
     );
   }

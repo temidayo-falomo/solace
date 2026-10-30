@@ -49,9 +49,6 @@ function App() {
           <span>THE SEASON GUESTLIST</span>
         </div>
         <h1 id="event-title">SOLACE</h1>
-        <div className="event-strip">
-          <span>First access to everything we drop this season.</span>
-        </div>
         <div className="hero-art">
           <img
             src="/solace-artwork.webp"
@@ -93,10 +90,8 @@ function App() {
             <br />
             <span>SOLACE.</span>
           </h2>
-          <p>First access to everything we drop this season.</p>
         </div>
         <div className="rsvp-details">
-          <p>Join our season interest pool for first access to future RSVPs and ticket drops.</p>
           <RsvpForm />
         </div>
       </section>
