@@ -1,54 +1,42 @@
-.reserve-page{max-width:1800px;margin:auto;padding:0 clamp(20px,4vw,64px);background:var(--paper)}.reserve-nav{display:flex;align-items:center;justify-content:space-between;padding:28px 0;border-bottom:2px solid;gap:20px}.reserve-nav>a:nth-child(2){font-size:12px;font-weight:800}.reserve-nav>span{font-size:10px;font-weight:800;letter-spacing:.12em}.reserve-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;padding:56px 0 38px}.reserve-intro h1{font:clamp(46px,6.5vw,94px)/.95 var(--display);letter-spacing:-.065em;margin:20px 0 0}.reserve-intro em{font-style:normal;color:var(--red)}.reserve-intro>p{font-size:16px;line-height:1.6;margin:0 0 4px}.reserve-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:start}.room-panel{border:2px solid;background:#0d0e0c;color:var(--paper);position:sticky;top:20px}.room-heading{padding:19px 20px;display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #ffffff30}.room-heading h2,.room-heading>span{font-size:10px;letter-spacing:.08em;margin:0;font-weight:800}.room-heading>span{color:#c9a45c;font-size:9px}.room-foot{display:flex;justify-content:space-between;gap:12px;padding:17px 20px;font-size:9px;letter-spacing:.04em;border-top:1px solid #ffffff30}.room-foot i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#c9a45c;margin-right:6px}.reservation-panel{padding:26px;border:2px solid;background:#ffe7ad}.reservation-panel h2{font:33px/1.06 var(--display);letter-spacing:-.05em;margin:16px 0}.reserve-help{font-size:12px;line-height:1.5}.table-sections{border-top:1px solid #17140f40;margin-top:22px}.table-section{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #17140f30;gap:12px}.table-section strong{display:block;font-size:11px}.table-section small{font-size:10px;opacity:.6}.table-buttons{display:flex;gap:6px}.table-buttons button{width:36px;height:34px;border:1px solid #17140f50;background:transparent;font-size:11px;font-weight:800;cursor:pointer}.table-buttons button:hover{background:#f4cb4c}.table-buttons button[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}.selection-summary{margin-top:25px;display:flex;flex-direction:column;gap:8px}.selection-summary small{font-size:9px;font-weight:800;letter-spacing:.1em}.selection-summary strong{font:28px var(--display);letter-spacing:-.05em}.selection-summary span{font-size:11px}.booking-note{font-size:11px;line-height:1.6;border-top:1px dashed #17140f60;padding-top:16px;margin-top:18px}.reserve-action{width:100%;padding:16px;border:2px solid var(--ink);background:var(--red);font-size:12px;font-weight:900;cursor:pointer}.reserve-action:disabled{background:#17140f15;cursor:default;opacity:.5}.final-note{text-align:center;font-size:10px;margin-bottom:0}.reserve-footer{display:flex;justify-content:space-between;align-items:center;gap:24px;border-top:2px solid;margin-top:52px;padding:28px 0}.reserve-footer>span,.reserve-footer>a:last-child{font-size:9px;font-weight:800;letter-spacing:.05em}@media(max-width:1050px){.reserve-layout{grid-template-columns:minmax(0,1fr) 320px}.reservation-panel{padding:20px}.room-heading>span{display:none}}@media(max-width:760px){.reserve-nav>span{display:none}.reserve-nav .wordmark{font-size:35px}.reserve-intro{display:block;padding-top:34px}.reserve-intro h1{font-size:clamp(43px,10vw,70px)}.reserve-intro>p{margin-top:22px;font-size:14px}.reserve-intro>p br{display:none}.reserve-layout{grid-template-columns:1fr}.room-panel{position:static}.room-heading>span{display:inline}.reservation-panel{padding:24px}.table-buttons button{width:44px;height:38px}.reserve-footer{flex-wrap:wrap}.reserve-footer>span{order:3;width:100%;font-size:8px}.room-foot{padding-inline:12px;font-size:8px}}
-
-/* The reservation workspace occupies the viewport; only its sidebar scrolls. */
-.reserve-page{max-width:none;width:100%;height:100dvh;min-height:0;margin:0;padding:0;display:flex;flex-direction:column;overflow:hidden}
-.reserve-nav{flex:0 0 72px;padding:16px 28px;gap:24px}
-.reserve-nav .wordmark{font-size:36px}
-.reserve-layout{flex:1;min-height:0;grid-template-columns:minmax(0,1fr) 360px;gap:0;align-items:stretch}
-.room-panel{position:relative;top:auto;min-width:0;min-height:0;border:0;display:flex;flex-direction:column}
-.room-heading,.room-foot{flex-shrink:0}
-
-.reservation-panel{min-height:0;overflow-y:auto;overscroll-behavior:contain;border:0;border-left:2px solid var(--ink);padding:26px;scrollbar-gutter:stable}
-@media(max-width:1050px){.reserve-layout{grid-template-columns:minmax(0,1fr) 320px}.reservation-panel{padding:20px}}
-@media(max-width:760px){
- .reserve-page{height:auto;min-height:100dvh;overflow:visible}
- .reserve-nav{flex-basis:64px;padding:15px 20px}
- .reserve-layout{display:flex;flex-direction:column;flex:none}
- .room-panel{height:calc(100dvh - 64px);min-height:400px;flex:none}
- 
- .reservation-panel{overflow:visible;border-left:0;border-top:2px solid var(--ink);padding:24px}
-}
-
-/* Solace: fluorescent accents, condensed type and a black canvas. */
-.reserve-page { --paper:var(--black); --ink:var(--white); --red:var(--pink); --display:var(--condensed); background:var(--black); color:var(--white); font-family:Arial,sans-serif; }
-.reserve-nav { border-bottom:1px solid #ffffff30; }
-.reserve-nav .wordmark { font-family:var(--condensed); font-size:42px; letter-spacing:.08em; color:var(--pink); }
-.reserve-nav>a:nth-child(2) { font-weight:400; }
-.reserve-nav>span { color:var(--lime); font-size:11px; }
-.room-heading h2 { color:var(--lime); }
-.room-heading>span { color:var(--pink); }
-.room-foot { color:#cccccc; }
-.room-foot i { background:var(--lime); }
-.reservation-panel { background:#10120e; border-left:1px solid #ffffff30; }
-.section-label { color:var(--lime); font-size:10px; font-weight:700; letter-spacing:.13em; margin:0; }
-.reservation-panel h1 { font:clamp(54px,5vw,76px)/.92 var(--condensed); letter-spacing:.015em; margin:24px 0 18px; text-transform:uppercase; }
-.reservation-panel h1 em { color:var(--pink); font-style:normal; }
-.reserve-help { color:#b9bdb4; }
-.table-sections { border-color:#ffffff30; }
-.table-section { border-color:#ffffff20; }
-.table-section small { opacity:1; color:#a0a795; }
-.table-buttons button { border-color:#647049; color:var(--lime); min-height:36px; }
-.table-buttons button:hover { background:#84c31822; }
-.table-buttons button[aria-pressed=true] { background:var(--lime); border-color:var(--lime); color:var(--black); }
-.selection-summary small { color:var(--pink); }
-.selection-summary strong { font-size:36px; letter-spacing:.02em; }
-.selection-summary span { color:#c1c5ba; }
-.booking-note { border-color:#ffffff35; color:#b9bdb4; }
-.reserve-action { border:1px solid var(--pink); color:var(--black); transition:background .2s; }
-.reserve-action:hover:enabled { background:var(--lime); border-color:var(--lime); }
-.reserve-action:disabled { background:#ffffff12; color:#b9bdb4; border-color:#ffffff30; }
-.reserve-page :is(a,button):focus-visible { outline:2px solid var(--pink); outline-offset:4px; }
-.lounge-plate { border-color:#84c31855; }
-.lounge-plate h3 { font-family:var(--condensed); color:var(--pink); }
-.lounge-controls button[aria-pressed=true] { border-color:var(--lime); color:var(--lime); background:#84c3181a; }
-@media(max-width:760px) { .reservation-panel { border-top:1px solid #ffffff30; } .reserve-nav .wordmark { font-size:34px; } }
+.reserve-page{width:100%;height:100dvh;min-height:0;display:flex;flex-direction:column;overflow:hidden;background:var(--black);color:var(--white);font-family:Arial,sans-serif}
+.reserve-nav{flex-shrink:0;min-height:72px;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;gap:24px;border-bottom:1px solid #ffffff30}
+.reserve-nav .wordmark{font-family:var(--condensed);font-size:42px;letter-spacing:.08em;color:var(--pink)}
+.reserve-nav>a:nth-child(2){font-size:12px}
+.open-table-sheet{border:1px solid var(--lime);background:var(--lime);color:var(--black);padding:12px 18px;font-size:11px;font-weight:800;cursor:pointer}
+.open-table-sheet:hover{background:var(--pink);border-color:var(--pink)}
+.reserve-layout{flex:1;min-height:0;display:flex}
+.room-panel{position:relative;display:flex;flex:1;min-width:0;min-height:0}
+.table-sheet{position:fixed;inset:0 0 0 auto;margin:0;width:min(420px,100%);height:100dvh;max-width:100%;max-height:100dvh;padding:0;border:0;border-left:1px solid #ffffff30;overflow:auto;overscroll-behavior:contain;background:#10120e;color:var(--white);box-shadow:-20px 0 80px #0005}
+.table-sheet::backdrop{background:#03050366;backdrop-filter:blur(3px)}
+.table-sheet[open]{animation:table-sheet-in .25s ease-out}
+.reservation-panel{position:relative;padding:76px 30px 30px;min-height:100%;box-sizing:border-box}
+.close-table-sheet{position:absolute;right:24px;top:22px;width:36px;height:36px;border:1px solid #ffffff40;border-radius:50%;color:inherit;background:transparent;cursor:pointer}
+.close-table-sheet:hover{border-color:var(--pink);color:var(--pink)}
+.section-label{color:var(--lime);font-size:10px;font-weight:700;letter-spacing:.13em;margin:0}
+.reservation-panel h1{font:64px/.92 var(--condensed);letter-spacing:.015em;margin:24px 0 18px;text-transform:uppercase}
+.reservation-panel h1 em{color:var(--pink);font-style:normal}
+.reserve-help{font-size:12px;line-height:1.5;color:#b9bdb4}
+.table-sections{border-top:1px solid #ffffff30;margin-top:22px}
+.table-section{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #ffffff20;gap:12px}
+.table-section strong{display:block;font-size:11px}
+.table-section small{font-size:10px;color:#a0a795}
+.table-buttons{display:flex;gap:6px}
+.table-buttons button{width:40px;height:40px;border:1px solid #647049;background:transparent;color:var(--lime);font-size:11px;font-weight:800;cursor:pointer}
+.table-buttons button:hover{background:#84c31822}
+.table-buttons button[aria-pressed=true]{background:var(--lime);border-color:var(--lime);color:var(--black)}
+.selection-summary{margin-top:25px;display:flex;flex-direction:column;gap:8px}
+.selection-summary small{font-size:9px;font-weight:800;letter-spacing:.1em;color:var(--pink)}
+.selection-summary strong{font:36px var(--condensed);letter-spacing:.02em}
+.selection-summary span{font-size:11px;color:#c1c5ba}
+.booking-note{font-size:11px;line-height:1.6;border-top:1px dashed #ffffff35;padding-top:16px;margin-top:18px;color:#b9bdb4}
+.reserve-action{width:100%;padding:16px;border:1px solid var(--pink);background:var(--pink);color:var(--black);font-size:12px;font-weight:900;cursor:pointer;transition:background .2s}
+.reserve-action:hover:enabled{background:var(--lime);border-color:var(--lime)}
+.reserve-action:disabled{background:#ffffff12;color:#b9bdb4;border-color:#ffffff30;cursor:default;opacity:.5}
+.final-note{text-align:center;font-size:10px;margin-bottom:0}
+.reserve-page :is(a,button):focus-visible{outline:2px solid var(--pink);outline-offset:4px}
+.reserve-page .lounge-plate{border-color:#84c31855}
+.reserve-page .lounge-plate h3{font-family:var(--condensed);color:var(--pink)}
+.reserve-page .lounge-controls button[aria-pressed=true]{border-color:var(--lime);color:var(--lime);background:#84c3181a}
+@keyframes table-sheet-in{from{transform:translateX(100%);opacity:.5}to{transform:translateX(0);opacity:1}}
+@media(prefers-reduced-motion:reduce){.table-sheet[open]{animation:none}}
+@media(max-width:600px){.reserve-nav{min-height:64px;padding:12px 16px;gap:12px}.reserve-nav .wordmark{font-size:34px}.reserve-nav>a:nth-child(2){font-size:0}.reserve-nav>a:nth-child(2)::after{content:'← Back';font-size:11px}.open-table-sheet{padding:11px 12px}.reservation-panel{padding:72px 24px 24px}}
