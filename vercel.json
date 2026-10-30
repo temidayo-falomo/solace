@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/reserve-table", "destination": "/index.html" },
+    { "source": "/reserve-table/", "destination": "/index.html" }
+  ]
+}
