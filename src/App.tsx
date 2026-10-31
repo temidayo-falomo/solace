@@ -36,7 +36,7 @@ function App() {
         <span className="nav-caption">A LITTLE ESCAPE. A LATE NIGHT.</span>
         <nav className="nav-actions" aria-label="Main navigation">
           <a className="nav-rsvp" href="#rsvp">
-            RSVP to join the guestlist <span aria-hidden="true">↗</span>
+            RESERVE YOUR TABLE <span aria-hidden="true">↗</span>
           </a>
         </nav>
       </header>
@@ -62,7 +62,9 @@ function App() {
           />
           <a className="art-cta" href="#rsvp">
             <span>
-              RSVP to join the guestlist
+              YOUR MIDWEEK
+              <br />
+              ESCAPE STARTS HERE.
             </span>
             <span className="round-arrow" aria-hidden="true">
               ↘
