@@ -35,9 +35,6 @@ function App() {
         </a>
         <span className="nav-caption">A LITTLE ESCAPE. A LATE NIGHT.</span>
         <nav className="nav-actions" aria-label="Main navigation">
-          <a className="nav-lounge" href="/reserve-section">
-            Find your spot <span aria-hidden="true">↗</span>
-          </a>
           <a className="nav-rsvp" href="#rsvp">
             RSVP to join the guestlist <span aria-hidden="true">↗</span>
           </a>
@@ -110,17 +107,6 @@ function App() {
             />
           ))}
         </div>
-      </section>
-
-      <section className="lounge-invite" aria-labelledby="lounge-title">
-        <div>
-          <p className="section-kicker">TAKE A LOOK AROUND / 0808 LOUNGE</p>
-          <h2 id="lounge-title">YOUR NIGHT. YOUR SPOT.</h2>
-          <p>A little closer to the music. A little room for your people. Step inside the lounge and choose your section.</p>
-        </div>
-        <a className="lounge-link" href="/reserve-section">
-          Step inside the lounge <span aria-hidden="true">↗</span>
-        </a>
       </section>
 
       <section className="rsvp-section" id="rsvp" aria-labelledby="rsvp-title">
