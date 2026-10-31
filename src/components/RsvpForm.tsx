@@ -35,7 +35,7 @@ export function RsvpForm({ section }: { section?: number }) {
 
     setStatus("sending");
     try {
-      await saveRsvp({ name: String(data.get("name") || "").trim(), email, phone: String(data.get("phone") || "").trim() });
+      await saveRsvp({ firstName, lastName, email, phone: String(data.get("phone") || "").trim() });
       setStatus("sent");
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "We couldn’t confirm your signup. Please try again.");
@@ -55,7 +55,7 @@ export function RsvpForm({ section }: { section?: number }) {
     <form className="rsvp-form" onSubmit={submit} aria-busy={status === "sending"}>
       <h3>{title}</h3>
       <div className="rsvp-fields">
-        {isReservation ? <>
+        <>
         <label>
           First Name
           <input
@@ -74,11 +74,8 @@ export function RsvpForm({ section }: { section?: number }) {
             maxLength={80}
           />
         </label>
-        </> : <>
-          <label className="rsvp-field-wide">
-            Full name
-            <input name="name" autoComplete="name" required maxLength={160} pattern=".*\S.*" />
-          </label>
+        </>
+        {!isReservation && <>
           <label className="rsvp-field-wide">
             Phone (optional)
             <input name="phone" type="tel" autoComplete="tel" maxLength={40} />

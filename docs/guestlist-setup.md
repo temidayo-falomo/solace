@@ -4,7 +4,7 @@ Status: dedicated Google Sheet created and standalone Apps Script deployed and a
 
 ## Google owner steps
 
-1. Create a **new, dedicated** Google spreadsheet called “Solace season guestlist”. Rename its empty first tab `Guestlist`. Set A1:F1 to exactly: `Timestamp`, `Name`, `Email`, `Phone`, `Source`, `Mode`. Leave all other columns empty. Copy the spreadsheet ID from its URL.
+1. Create a **new, dedicated** Google spreadsheet called “Solace season guestlist”. Rename its empty first tab `Guestlist`. Set A1:G1 to exactly: `Timestamp`, `First Name`, `Last Name`, `Email`, `Phone`, `Source`, `Mode`. Leave all other columns empty. Copy the spreadsheet ID from its URL.
 2. Create a **new standalone** project at https://script.google.com. Paste `google-apps-script/Guestlist.gs` into `Code.gs`. This script only appends to the dedicated tab, checks headers before writes, and preserves existing rows. Do not replace an existing deployed script or point this at an existing integration without inspecting and discussing its structure first.
 3. Generate a random secret of at least 32 characters (for example `openssl rand -hex 32`). In Apps Script → Project Settings → Script properties, add `SOLACE_GUESTLIST_SECRET` and `SOLACE_GUESTLIST_SHEET_ID`. Do not commit these values.
 4. Deploy → New deployment → Web app → Execute as **Me** → Who has access **Anyone** → Deploy. **Authorize access using the Google account that owns the new Sheet** when prompted. Copy the `/exec` deployment URL. Workspace administrators may need to enable public web apps.
@@ -26,3 +26,5 @@ Apps Script web app and lock behavior: https://developers.google.com/apps-script
 - Script project: https://script.google.com/home/projects/1Qfu_mmFl4cS9thMYrhB3Ev01TKpBWepbYsoN3Q4kQpRio0MznR9JDQeE/edit
 - The active `/exec` URL is saved in ignored `.env.local`; keep the secret out of documentation and browser bundles.
 - A clearly labelled `Solace Setup Test` row with `solace-setup-test@example.com` remains for verification.
+
+31 October 2026: migrated Name into First Name and Last Name, preserving the two existing entries. Apps Script updated at the same endpoint.

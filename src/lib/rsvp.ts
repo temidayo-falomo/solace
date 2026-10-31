@@ -1,4 +1,4 @@
-export type Rsvp = { name: string; email: string; phone?: string };
+export type Rsvp = { firstName: string; lastName: string; email: string; phone?: string };
 
 export async function saveRsvp(rsvp: Rsvp): Promise<void> {
   const response = await fetch('/api/guestlist', {
