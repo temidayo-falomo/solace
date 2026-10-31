@@ -19,12 +19,12 @@ function doPost(e) {
     if (!e || !e.postData || e.postData.contents.length > 4096) return jsonResponse({ ok: false, error: 'invalid_payload' });
     const data = JSON.parse(e.postData.contents);
     if (!data || data.secret !== secret) return jsonResponse({ ok: false, error: 'unauthorized' });
-    if (typeof data.firstName !== 'string' || typeof data.lastName !== 'string' || typeof data.email !== 'string' || (data.phone !== undefined && typeof data.phone !== 'string')) return jsonResponse({ ok: false, error: 'validation' });
+    if (typeof data.firstName !== 'string' || typeof data.lastName !== 'string' || typeof data.email !== 'string' || typeof data.phone !== 'string') return jsonResponse({ ok: false, error: 'validation' });
     const firstName = data.firstName.trim();
     const lastName = data.lastName.trim();
     const email = data.email.trim().toLowerCase();
-    const phone = (data.phone || '').trim();
-    if (!firstName || firstName.length > 80 || !lastName || lastName.length > 80 || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || phone.length > 40 || (phone && !/^[+\d\s().-]+$/.test(phone)) || [firstName, lastName, email, phone].some(v => /[\u0000-\u001f\u007f]/.test(v)) || data.source !== 'landing' || data.mode !== 'season-guestlist') return jsonResponse({ ok: false, error: 'validation' });
+    const phone = data.phone.trim();
+    if (!firstName || firstName.length > 80 || !lastName || lastName.length > 80 || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !phone || phone.length > 40 || !/^[+\d\s().-]+$/.test(phone) || [firstName, lastName, email, phone].some(v => /[\u0000-\u001f\u007f]/.test(v)) || data.source !== 'landing' || data.mode !== 'season-guestlist') return jsonResponse({ ok: false, error: 'validation' });
     lock = LockService.getScriptLock();
     lock.waitLock(10000);
     const sheet = SpreadsheetApp.openById(sheetId).getSheetByName('Guestlist');

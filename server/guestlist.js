@@ -3,13 +3,13 @@ export function validateGuestlist(body) {
   const { firstName, lastName, email, phone = '' } = body;
   if (typeof firstName !== 'string' || typeof lastName !== 'string' || typeof email !== 'string' || typeof phone !== 'string') return null;
   const value = { firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim().toLowerCase(), phone: phone.trim() };
-  if (!value.firstName || value.firstName.length > 80 || !value.lastName || value.lastName.length > 80 || value.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.email) || value.phone.length > 40 || (value.phone && !/^[+\d\s().-]+$/.test(value.phone)) || Object.values(value).some(v => /[\u0000-\u001f\u007f]/.test(v))) return null;
+  if (!value.firstName || value.firstName.length > 80 || !value.lastName || value.lastName.length > 80 || value.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.email) || !value.phone || value.phone.length > 40 || !/^[+\d\s().-]+$/.test(value.phone) || Object.values(value).some(v => /[\u0000-\u001f\u007f]/.test(v))) return null;
   return value;
 }
 
 export async function submitGuestlist(body, env = process.env, send = fetch) {
   const value = validateGuestlist(body);
-  if (!value) return { status: 400, body: { error: 'Enter your first and last name, a valid email, and an optional phone number (up to 40 characters).' } };
+  if (!value) return { status: 400, body: { error: 'Enter your first and last name, a valid email, and a Whatsapp number (up to 40 characters).' } };
   const url = env.SOLACE_GUESTLIST_APPS_SCRIPT_URL;
   const secret = env.SOLACE_GUESTLIST_SECRET;
   if (!url || !/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(url) || !secret || secret.length < 32) {

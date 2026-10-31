@@ -77,8 +77,8 @@ export function RsvpForm({ section }: { section?: number }) {
         </>
         {!isReservation && <>
           <label className="rsvp-field-wide">
-            Phone (optional)
-            <input name="phone" type="tel" autoComplete="tel" maxLength={40} />
+            Whatsapp Number
+            <input name="phone" type="tel" autoComplete="tel" required maxLength={40} />
           </label>
         </>}
         <label className="rsvp-field-wide">

@@ -34,7 +34,7 @@ function runtime() {
 
 test('validation rejects malformed and oversized input, normalizes email', () => {
   assert.equal(validateGuestlist(payload).email, 'person@example.com');
-  for (const value of [null, [], {}, { ...payload, firstName: ' ' }, { ...payload, email: 'bad' }, { ...payload, phone: 'abc' }, { ...payload, firstName: '=X\nY' }, { ...payload, lastName: 'x'.repeat(81) }]) assert.equal(validateGuestlist(value), null);
+  for (const value of [null, [], {}, { ...payload, firstName: ' ' }, { ...payload, email: 'bad' }, { ...payload, phone: '' }, { ...payload, phone: 'abc' }, { ...payload, firstName: '=X\nY' }, { ...payload, lastName: 'x'.repeat(81) }]) assert.equal(validateGuestlist(value), null);
 });
 test('backend fails on missing config, network, bad JSON, unconfirmed and HTTP failure', async () => {
   assert.equal((await submitGuestlist(payload, {})).status, 503);
@@ -57,7 +57,7 @@ test('backend through Apps Script persists then deduplicates; holds lock and flu
 test('Apps Script validates independently, rejects auth/schema failures, escapes formula cells', () => {
   const app = runtime();
   const data = { ...payload, firstName: '=1+1', secret: env.SOLACE_GUESTLIST_SECRET, source: 'landing', mode: 'season-guestlist' };
-  for (const value of [{ ...data, secret: 'wrong' }, { ...data, lastName: '' }, { ...data, email: 'bad' }, { ...data, phone: 'bad' }, { ...data, mode: 'event' }]) assert.equal(app.call(value).ok, false);
+  for (const value of [{ ...data, secret: 'wrong' }, { ...data, lastName: '' }, { ...data, email: 'bad' }, { ...data, phone: '' }, { ...data, phone: 'bad' }, { ...data, mode: 'event' }]) assert.equal(app.call(value).ok, false);
   assert.equal(app.rows.length, 1);
   assert.equal(app.call(data).ok, true);
   assert.equal(app.rows[1][1], "'=1+1");
