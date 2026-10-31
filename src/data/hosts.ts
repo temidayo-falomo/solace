@@ -26,7 +26,7 @@ export const eventPromotion = {
   dateLabel: 'WED 4TH NOV, 2026',
   venue: '0808 Lagos',
   time: '8:00 PM — 2:00 AM',
-  entry: 'Table reservations only',
+  entry: 'RSVP & Table Reservations Only',
   artists: ['UNCLE BUBU', 'SEYI DURETTI', 'ZULU TEBEDA'],
   bookingPath: '/reserve-section',
   calendarPath: '/solace.ics',
