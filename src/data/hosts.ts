@@ -20,7 +20,7 @@ export const hosts = [
 ];
 
 
-// Preserved event promotion data; hidden on the season guestlist landing page.
+// Event details displayed on the landing page.
 export const eventPromotion = {
   date: 'Wednesday, 4 November 2026',
   dateLabel: 'WED 4TH NOV, 2026',
