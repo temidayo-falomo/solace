@@ -22,8 +22,8 @@ export const hosts = [
 
 // Event details displayed on the landing page.
 export const eventPromotion = {
-  date: 'Wednesday, 4 November 2026',
-  dateLabel: 'WED 4TH NOV, 2026',
+  date: 'Wednesday, 18 November 2026',
+  dateLabel: 'WED 18TH NOV, 2026',
   venue: '0808 Lagos',
   time: '8:00 PM — 2:00 AM',
   entry: 'RSVP & Table Reservations Only',

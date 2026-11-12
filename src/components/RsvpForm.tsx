@@ -20,7 +20,7 @@ export function RsvpForm({ section }: { section?: number }) {
 
     if (isReservation) {
       const message = [
-        "Hi EXA, I would like to confirm my table reservation for SOLACE on Wednesday, 4 November 2026 at 0808 Lagos.",
+        "Hi EXA, I would like to confirm my table reservation for SOLACE on Wednesday, 18 November 2026 at 0808 Lagos.",
         `First Name: ${firstName}`,
         `Last Name: ${lastName}`,
         `Email Address: ${email}`,
