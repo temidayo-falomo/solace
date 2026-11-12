@@ -5,9 +5,11 @@
 }
 
 :root {
-  --black: #131313;
-  --pink: #e952de;
-  --lime: #a0d92b;
+  --black: #263dff;
+  --blue: #263dff;
+  --ink: #17278f;
+  --pink: #ff85b3;
+  --lime: var(--pink);
   --white: #f2f2f2;
   --condensed: 'Bebas Neue', 'Arial Narrow', sans-serif;
 }
@@ -39,4 +41,4 @@ a {
   text-decoration: none;
 }
 
-html{scroll-padding-top:20px} body{font-family:Arial,Helvetica,sans-serif} ::selection{background:var(--pink);color:#131313}
+html{scroll-padding-top:20px} body{font-family:Arial,Helvetica,sans-serif} ::selection{background:var(--pink);color:var(--blue)}

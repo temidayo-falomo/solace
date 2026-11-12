@@ -10,9 +10,9 @@
   align-items: center;
   gap: 10px;
   padding: 8px 18px 8px 8px;
-  border: 1px solid #e952de80;
+  border: 1px solid #ff85b380;
   border-radius: 40px;
-  background: #131313f5;
+  background: #17278ff5;
   color: var(--white);
   box-shadow: 0 6px 24px #0006;
   font-family: inherit;
@@ -34,7 +34,7 @@
 .music-player-control svg { width: 21px; height: 21px; fill: currentColor; }
 .music-player-credit { display: grid; gap: 3px; text-align: left; }
 .music-player-credit strong { font-size: 12px; }
-.music-player-credit > span { font-size: 10px; color: #c5c5bd; }
+.music-player-credit > span { font-size: 10px; color: #f2f2f2; }
 .music-player-error { display: block; font-size: 11px; max-width: 240px; }
 .music-player-error:not(:empty) { margin-top: 6px; padding: 7px 10px; border-radius: 8px; background: var(--black); }
 body:has(.reserve-page) .music-player { bottom: calc(110px + env(safe-area-inset-bottom)); }

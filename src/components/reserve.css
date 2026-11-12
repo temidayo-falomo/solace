@@ -6,7 +6,7 @@
 .open-table-sheet:hover{background:var(--pink);border-color:var(--pink)}
 .reserve-layout{flex:1;min-height:0;display:flex}
 .room-panel{position:relative;display:flex;flex:1;min-width:0;min-height:0}
-.table-sheet{position:fixed;inset:0 0 0 auto;margin:0;width:min(420px,100%);height:100dvh;max-width:100%;max-height:100dvh;padding:0;border:0;border-left:1px solid #ffffff30;overflow:auto;overscroll-behavior:contain;background:#10120e;color:var(--white);box-shadow:-20px 0 80px #0005}
+.table-sheet{position:fixed;inset:0 0 0 auto;margin:0;width:min(420px,100%);height:100dvh;max-width:100%;max-height:100dvh;padding:0;border:0;border-left:1px solid #ffffff30;overflow:auto;overscroll-behavior:contain;background:var(--blue);color:var(--white);box-shadow:-20px 0 80px #0005}
 .table-sheet::backdrop{background:#03050366;backdrop-filter:blur(3px)}
 .table-sheet[open]{animation:table-sheet-in .25s ease-out}
 .reservation-panel{position:relative;padding:76px 30px 30px;min-height:100%;box-sizing:border-box}
@@ -15,28 +15,28 @@
 .section-label{color:var(--lime);font-size:10px;font-weight:700;letter-spacing:.13em;margin:0}
 .reservation-panel h1{font:64px/.92 var(--condensed);letter-spacing:.015em;margin:24px 0 18px;text-transform:uppercase}
 .reservation-panel h1 em{color:var(--pink);font-style:normal}
-.reserve-help{font-size:12px;line-height:1.5;color:#b9bdb4}
+.reserve-help{font-size:12px;line-height:1.5;color:#f2f2f2}
 .table-sections{border-top:1px solid #ffffff30;margin-top:22px}
 .table-section{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #ffffff20;gap:12px}
 .table-section strong{display:block;font-size:11px}
-.table-section small{font-size:10px;color:#a0a795}
+.table-section small{font-size:10px;color:#f2f2f2}
 .table-buttons{display:flex;gap:6px}
-.table-buttons button{width:40px;height:40px;border:1px solid #647049;background:transparent;color:var(--lime);font-size:11px;font-weight:800;cursor:pointer}
-.table-buttons button:hover{background:#84c31822}
+.table-buttons button{width:40px;height:40px;border:1px solid #ff85b380;background:transparent;color:var(--lime);font-size:11px;font-weight:800;cursor:pointer}
+.table-buttons button:hover{background:#ff85b322}
 .table-buttons button[aria-pressed=true]{background:var(--lime);border-color:var(--lime);color:var(--black)}
 .selection-summary{margin-top:25px;display:flex;flex-direction:column;gap:8px}
 .selection-summary small{font-size:9px;font-weight:800;letter-spacing:.1em;color:var(--pink)}
 .selection-summary strong{font:36px var(--condensed);letter-spacing:.02em}
-.selection-summary span{font-size:11px;color:#c1c5ba}
-.booking-note{font-size:11px;line-height:1.6;border-top:1px dashed #ffffff35;padding-top:16px;margin-top:18px;color:#b9bdb4}
+.selection-summary span{font-size:11px;color:#f2f2f2}
+.booking-note{font-size:11px;line-height:1.6;border-top:1px dashed #ffffff35;padding-top:16px;margin-top:18px;color:#f2f2f2}
 .reserve-action{width:100%;padding:16px;border:1px solid var(--pink);background:var(--pink);color:var(--black);font-size:12px;font-weight:900;cursor:pointer;transition:background .2s}
 .reserve-action:hover:enabled{background:var(--lime);border-color:var(--lime)}
-.reserve-action:disabled{background:#ffffff12;color:#b9bdb4;border-color:#ffffff30;cursor:default;opacity:.5}
+.reserve-action:disabled{background:#ffffff12;color:#f2f2f2;border-color:#ffffff30;cursor:default;opacity:.5}
 .final-note{text-align:center;font-size:10px;margin-bottom:0}
 .reserve-page :is(a,button):focus-visible{outline:2px solid var(--pink);outline-offset:4px}
-.reserve-page .lounge-plate{border-color:#84c31855}
+.reserve-page .lounge-plate{border-color:#ff85b355}
 .reserve-page .lounge-plate h3{font-family:var(--condensed);color:var(--pink)}
-.reserve-page .lounge-controls button[aria-pressed=true]{border-color:var(--lime);color:var(--lime);background:#84c3181a}
+.reserve-page .lounge-controls button[aria-pressed=true]{border-color:var(--lime);color:var(--lime);background:#ff85b31a}
 @keyframes table-sheet-in{from{transform:translateX(100%);opacity:.5}to{transform:translateX(0);opacity:1}}
 @media(prefers-reduced-motion:reduce){.table-sheet[open]{animation:none}}
 @media(max-width:600px){.reserve-nav{min-height:64px;padding:12px 16px;gap:12px}.reserve-nav .wordmark{font-size:34px}.reserve-nav>a:nth-child(2){font-size:0}.reserve-nav>a:nth-child(2)::after{content:'← Back';font-size:11px}.open-table-sheet{padding:11px 12px}.reservation-panel{padding:72px 24px 24px}}
