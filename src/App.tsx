@@ -44,7 +44,7 @@ function App() {
       <section className="hero" aria-labelledby="event-title">
         <div className="hero-eyebrow">
           <span>LAGOS, LET’S GET TOGETHER.</span>
-          <span>18.11.26 / NOVEMBER 2026</span>
+          <span>25.11.26 / NOVEMBER 2026</span>
         </div>
         <h1 id="event-title">SOLACE</h1>
         <div className="event-strip">
@@ -53,13 +53,11 @@ function App() {
           <span>8PM—2AM</span>
         </div>
         <div className="hero-art">
-          <img
-            src="/poster.png"
-            width="1080"
-            height="1350"
-            alt="Blue-and-pink portraits of the Solace selectors, Uncle Bubu, Seyi Duretti and Zulu Tebeda, from the 18 November poster."
-            fetchPriority="high"
-          />
+          <div className="poster-portraits" role="img" aria-label="Three yellow, charcoal and off-white film portraits from the Solace 25 November poster.">
+            <span className="poster-portrait" />
+            <span className="poster-portrait" />
+            <span className="poster-portrait" />
+          </div>
           <a className="art-cta" href="#rsvp">
             <span>
               YOUR MIDWEEK
@@ -141,7 +139,7 @@ function App() {
         <a className="small-wordmark" href="#">
           SOLACE
         </a>
-        <span>WED 18.11.26 / LAGOS</span>
+        <span>WED 25.11.26 / LAGOS</span>
         <a href="#event-title">BACK TO TOP ↑</a>
       </footer>
       <MusicPlayer />

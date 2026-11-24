@@ -46,7 +46,7 @@ stage.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 const tableTargets = [];
 function registerTable(id, x, z) {
- const marker = new THREE.Mesh(new THREE.CylinderGeometry(.55,.55,.045,32), new THREE.MeshBasicMaterial({color:0xe952de, transparent:true, opacity:.6, toneMapped:false}));
+ const marker = new THREE.Mesh(new THREE.CylinderGeometry(.55,.55,.045,32), new THREE.MeshBasicMaterial({color:0xf9d548, transparent:true, opacity:.6, toneMapped:false}));
  marker.position.set(x,.49,z); marker.userData.tableId=id; marker.userData.marker=true; scene.add(marker); tableTargets.push(marker);
 
 }
@@ -56,7 +56,7 @@ function updateSectionStates() {
  tableTargets.filter(m => m.userData.marker).forEach(m => {
   const selected = m.userData.tableId === selectedSection;
   const hovered = m.userData.tableId === hoveredSection;
-  m.material.color.setHex(selected ? 0xf5a0ee : hovered ? 0xf17ce7 : 0xe952de);
+  m.material.color.setHex(selected ? 0xfff0a8 : hovered ? 0xffe479 : 0xf9d548);
   m.material.opacity = selected ? .95 : hovered ? .85 : .6;
  });
  sectionBadges.forEach((badge, id) => badge.userData.paint(id === selectedSection ? 'selected' : id === hoveredSection ? 'hover' : 'idle'));
@@ -243,8 +243,8 @@ function label(text, x, y, z, size = 0.5, sub) {
     const actionable = Boolean(sub), selected = state === 'selected';
     const ink = actionable ? '#131313' : '#e8dec7';
     g.clearRect(0, 0, c.width, c.height);
-    g.fillStyle = actionable ? (selected ? '#f5a0ee' : state === 'hover' ? '#f17ce7' : '#e952de') : 'rgba(13,14,12,.86)';
-    g.strokeStyle = actionable ? '#ffd7fa' : '#c9a45c'; g.lineWidth = selected ? 10 : 4;
+    g.fillStyle = actionable ? (selected ? '#fff0a8' : state === 'hover' ? '#ffe479' : '#f9d548') : 'rgba(13,14,12,.86)';
+    g.strokeStyle = actionable ? '#fff7d4' : '#c9a45c'; g.lineWidth = selected ? 10 : 4;
     g.beginPath(); g.roundRect(4, 4, 504, c.height - 8, 14); g.fill(); g.stroke();
     g.fillStyle = ink; g.textAlign = 'center'; g.textBaseline = 'middle';
     g.font = '700 52px Manrope, Arial, sans-serif'; g.fillText(text, 256, sub ? 70 : 66);

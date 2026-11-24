@@ -10,16 +10,16 @@
   align-items: center;
   gap: 10px;
   padding: 8px 18px 8px 8px;
-  border: 1px solid #ff85b380;
+  border: 1px solid #f9d54880;
   border-radius: 40px;
-  background: #17278ff5;
+  background: #202020f5;
   color: var(--white);
   box-shadow: 0 6px 24px #0006;
   font-family: inherit;
   cursor: pointer;
 }
-.music-player > button:hover { border-color: var(--lime); }
-.music-player > button:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+.music-player > button:hover { border-color: var(--accent); }
+.music-player > button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .music-player > button:disabled { cursor: wait; }
 .music-player-control {
   display: grid;
@@ -28,7 +28,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--pink);
+  background: var(--accent);
   color: var(--black);
 }
 .music-player-control svg { width: 21px; height: 21px; fill: currentColor; }
